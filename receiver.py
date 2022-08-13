@@ -20,6 +20,7 @@ class Receiver(Base):
 
     def process_vector(self, vector: np.array) -> None:
         """Group 100 vectors and compute std and mean"""
+        output = None
         if self.matrix is None:
             self.matrix = np.array([vector])
             self.time_window_start = time.time()
@@ -28,8 +29,15 @@ class Receiver(Base):
         if self.matrix.shape[0] == 100:
             now = time.time()
             output = f"{self.time_window_start},{now},{self.matrix.mean()},{self.matrix.std()}"
-            self.outfile.write(output + "\n")
             self.matrix = None
+        return output
+
+
+    def write_vector_stats(self, vector: np.array) -> None:
+        """Write the vector processing output to a file"""
+        output = self.process_vector(vector)
+        if output:
+            self.outfile.write(output + "\n")
 
 
     def receive_message(self) -> None:
@@ -40,7 +48,7 @@ class Receiver(Base):
             if self.pipe.poll():
                 vector = self.pipe.recv()
                 self.message_counter += 1
-                self.process_vector(vector)
+                self.write_vector_stats(vector)
 
 
     def stats(self) -> None:

@@ -24,7 +24,7 @@ Obviously this is out of scope in the exercise, at least as long as it's unclear
 An alternative could be using `mmap` and fork child processes manually.
 
 ### Unit tests
-Skipped for the time being, for the sake of keeping the exercise simple.
+Run `python -m pytest`
 
 ### Linting and static code analysis
 I've used `pylint` without any customizations. Simply run `pylint *.py`.
