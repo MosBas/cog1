@@ -24,7 +24,10 @@ Obviously this is out of scope in the exercise, at least as long as it's unclear
 An alternative could be using `mmap` and fork child processes manually.
 
 ### Unit tests
-Run `python -m pytest`
+Run `python -m pytest`.
+
+I didn't add tests to anything that is random or temporal just to keep this exercise simple.
+It's possible to test those as well with some mocking.
 
 ### Linting and static code analysis
 I've used `pylint` without any customizations. Simply run `pylint *.py`.
